@@ -1,0 +1,9 @@
+[{
+  "id": 1,
+  "type": "Turismo",
+  "name": "Turismo",
+  "description": "Descrição da categoria",
+  "urlImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbtwvthT6W_4lJ_r6vyrtA-yjpb9FWrtcLxQ&usqp=CAU",
+  "bActive": true,
+  "sortOrder": 1
+}]
