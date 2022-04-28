@@ -15,19 +15,12 @@ class EventoController extends GetxController {
   final isUpdate = RxBool(false);
 
   static EventoController instance = Get.find();
-  RxList<EventoModel> _eventos = RxList<EventoModel>([]);
-  List<EventoModel> get eventos => _eventos.value;
+  RxList<EventoModel> eventos = <EventoModel>[].obs;
+  RxList<LocalEventoModel> localEventos = <LocalEventoModel>[].obs;
 
-  RxList<LocalEventoModel> _localEventos = RxList<LocalEventoModel>([]);
-  List<LocalEventoModel> get localEventos => _localEventos.value;
-
-  obterTodosEventos() async {
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("TOKEN", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZWx2eXMuZmVycmFyaUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVU0VSIiwiZXhwIjoxNjUxMTA5OTUyfQ.XoLLVSKDh1l1bwKGuRcecXMkg963jPYxsA6ATR5bYo0");
-
+  Future obterTodosEventos() async {
     Response response;
-    _eventos = RxList<EventoModel>([]);
+    eventos.value = [];
     try {
       response = await _http.getRequest('/evento');
       if(response.statusCode == 200){
@@ -36,19 +29,16 @@ class EventoController extends GetxController {
             .toList()
             .cast<EventoModel>();
 
-        _eventos.addAll(eventoData);
+        eventos.value.addAll(eventoData);
+        eventos.refresh();
       }
     } catch (e) {
     }
   }
 
-  obterTodosLocaisEventos() async {
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("TOKEN", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZWx2eXMuZmVycmFyaUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVU0VSIiwiZXhwIjoxNjUxMTA5OTUyfQ.XoLLVSKDh1l1bwKGuRcecXMkg963jPYxsA6ATR5bYo0");
-
+  Future obterTodosLocaisEventos() async {
     Response response;
-    _localEventos = RxList<LocalEventoModel>([]);
+    localEventos.value = [];
     try {
       response = await _http.getRequest('/evento/locais');
       if(response.statusCode == 200){
@@ -57,7 +47,8 @@ class EventoController extends GetxController {
             .toList()
             .cast<LocalEventoModel>();
 
-        _localEventos.addAll(localEventoData);
+        localEventos.value.addAll(localEventoData);
+        localEventos.refresh();
       }
     } catch (e) {
     }

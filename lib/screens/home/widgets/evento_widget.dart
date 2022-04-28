@@ -5,6 +5,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ticket_app/models/evento_model.dart';
 
+import '../../../constants/app_themes.dart';
+
 class EventoWidget extends StatefulWidget {
   final EventoModel evento;
   final double width;
@@ -50,9 +52,9 @@ class _EventoWidgetState extends State<EventoWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: Text("${widget.evento.nome}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),)),
+                    Expanded(child: Text("${widget.evento.nome}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textBlack),)),
                     Expanded(child:Text("${DateFormat('dd/MM HH:mm', 'pt')
-                        .format(DateTime.parse(widget.evento.dataHoraInicio!))} | ${widget.evento.localCidade} ", style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 10),)),
+                        .format(DateTime.parse(widget.evento.dataHoraInicio!))} | ${widget.evento.localCidade} ", style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 10, color: AppColors.textGrey),)),
                   ],
                 ),
               ),

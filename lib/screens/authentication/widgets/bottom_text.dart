@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_app/constants/app_themes.dart';
 
 class BottomTextWidget extends StatelessWidget {
   final Function()? onTap;
@@ -12,8 +13,8 @@ class BottomTextWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: RichText(text: TextSpan(children: [
-        TextSpan(text: text1, style: TextStyle(color: Colors.black)),
-        TextSpan(text: " $text2", style: TextStyle(color: Colors.blue))
+        TextSpan(text: text1, style: TextStyle(color: AppColors.textBlack)),
+        TextSpan(text: " $text2", style: TextStyle(color: AppColors.primary))
 
       ])),
     );

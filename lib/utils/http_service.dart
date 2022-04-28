@@ -26,6 +26,16 @@ class HttpService{
     return response;
   }
 
+  Future<Response> postRequest(String endPoint, data) async{
+    Response response;
+    try{
+      response = await _dio.post(endPoint, data: data);
+    } on DioError catch (e){
+      throw Exception(e.message);
+    }
+    return response;
+  }
+
   Future<void> initializeInterceptors() async {
     final prefs = await SharedPreferences.getInstance();
     var accessToken = await prefs.getString("TOKEN");

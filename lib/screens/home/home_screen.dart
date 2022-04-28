@@ -24,8 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    eventoController.obterTodosEventos();
-    eventoController.obterTodosLocaisEventos();
+    WidgetsBinding.instance?.addPostFrameCallback((_){
+      loadEventos();
+    });
+
+  }
+
+  loadEventos() async {
+    await eventoController.obterTodosEventos();
+    await eventoController.obterTodosLocaisEventos();
   }
 
   @override
@@ -97,7 +104,6 @@ class HomeMobile extends StatelessWidget {
                         ),
                       ],
                     )
-
                   ],
                 ),
                 const SizedBox(height: 15.0),
@@ -139,7 +145,7 @@ class HomeMobile extends StatelessWidget {
             color: Colors.white,
             child: const Padding(
               padding: EdgeInsets.only(left: 20, right: 18),
-              child: Text("Em Destaque no Ticket", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+              child: Text("Em Destaque no Ticket", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
             ),
           )
         ),
@@ -150,7 +156,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 175.0,
               child: Obx(() =>
-              eventoController.eventos.isEmpty ?
+              eventoController.eventos.length == 0 ?
               const Center(
                   child: SizedBox(
                       height: 50,
@@ -186,7 +192,7 @@ class HomeMobile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text("Shows e Festas", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text("Shows e Festas", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
                       Text("Ver mais", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ],
                   ),
@@ -202,7 +208,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 125.0,
               child: Obx(() =>
-              eventoController.eventos.isEmpty ?
+              eventoController.eventos.length == 0 ?
               const Center(
                   child: SizedBox(
                       height: 50,
@@ -233,7 +239,7 @@ class HomeMobile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("O melhor de cada cidade", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                      Text("O melhor de cada cidade", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
                       Text("Ver mais", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ],
                   ),
@@ -248,7 +254,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 200.0,
               child: Obx(() =>
-              eventoController.localEventos.isEmpty ?
+              eventoController.localEventos.length == 0 ?
               const Center(
                   child: SizedBox(
                       height: 75,
@@ -276,7 +282,7 @@ class HomeMobile extends StatelessWidget {
                 color: Colors.grey[100],
                 child: const Padding(
                   padding: EdgeInsets.only(left: 20, right: 18, top: 18),
-                  child: Text("Fique por dentro", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                  child: Text("Fique por dentro", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
                 ),
               )
           ),
@@ -302,15 +308,15 @@ class HomeMobile extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 16),
                           child: SizedBox(
                             height: 20,
-                            child: Text(_itemsFiquePorDentro[index].titulo, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                            child: Text(_itemsFiquePorDentro[index].titulo, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textBlack),)
                           ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: _itemsFiquePorDentro[index].items.map((item) {
                             return ListTile(
-                              title: Text(item.titulo, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal)),
-                              subtitle: Text(item.descricao, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
+                              title: Text(item.titulo, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textBlack)),
+                              subtitle: Text(item.descricao, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textGrey)),
                             );
                           }).toList()
                       ),

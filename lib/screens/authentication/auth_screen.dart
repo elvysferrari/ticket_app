@@ -4,6 +4,7 @@ import 'package:ticket_app/screens/authentication/widgets/bottom_text.dart';
 import 'package:ticket_app/screens/authentication/widgets/login.dart';
 import 'package:ticket_app/screens/authentication/widgets/signup.dart';
 import '../../constants/app_constants.dart';
+import '../../constants/app_themes.dart';
 import '../../constants/color_pallet.dart';
 import '../../controllers/app_controller.dart';
 
@@ -20,13 +21,14 @@ class AuthenticationScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.width / 5),
-              const Text(appName, style: TextStyle(
-                fontSize: 48,
-                color: PalletColor.textBlack
-              ),),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text(
+                  _appController.isLoginWidgetDisplayed.value ? "Fazer Login" : "Criar Conta"
+                , style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
+              ),
               //Image.asset("", width: 200,height: 150,),
-              const SizedBox(height: 32),
+              const SizedBox(height: 12),
               Visibility(
                   visible: _appController.isLoginWidgetDisplayed.value,
                   child: LoginWidget()),
@@ -53,7 +55,7 @@ class AuthenticationScreen extends StatelessWidget {
                     _appController.changeDIsplayedAuthWidget();
                   },
                   text1: "Você já tem uma conta?",
-                  text2: "Entrar!!",
+                  text2: "Entrar!",
                 ),
               ),
             ],

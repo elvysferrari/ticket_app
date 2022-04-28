@@ -45,14 +45,13 @@ class NavigationBarMobile extends StatelessWidget {
         tabs: menuItems.asMap().map((indice, item){
           return MapEntry(indice,
               Tab(
-
                 text: item.iconText,
                 icon: Icon(
                   item.icon,
                   color: selectedTabIndex == indice
                       ? AppColors.primary
                       : item.iconColor ,
-                  size: 28,
+                  size: 24,
                 ),
               ));
         }).values.toList()

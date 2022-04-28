@@ -25,11 +25,11 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: PhysicalModel(
         color: Colors.grey.withOpacity(.4),
-        elevation: 2,
-        borderRadius: BorderRadius.circular(20),
+        elevation: 0,
+        borderRadius: BorderRadius.circular(8),
         child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(8),
               color: bgColor ?? Colors.black,
             ),
             child: Container(

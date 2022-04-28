@@ -1,26 +1,26 @@
 class UserModel {
 
-  late String? id;
-  late String? name;
+  late int? id;
+  late String? nome;
   late String? email;
-  late String? urlImage;
-  late List<dynamic> eventoFavoritos;
+  late String? telefone;
+  late String? foto;
 
-  UserModel({this.id, this.name, this.email, this.urlImage, required this.eventoFavoritos});
+  UserModel({this.id, this.nome, this.email, this.telefone, this.foto});
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "name": name,
+    "nome": nome,
     "email": email,
-    "urlImage": urlImage,
-    "postsFavoritos" : eventoFavoritos
+    "telefone": telefone,
+    "foto": foto
   };
 
-  UserModel.fromMap(Map<String, dynamic> json){
-    id = json["id"] ?? "";
-    name = json["name"] ?? "";
+  UserModel.fromJson(Map<String, dynamic> json){
+    id = json["id"] ?? 0;
+    nome = json["nome"] ?? "";
     email = json["email"] ?? "";
-    urlImage =json["urlImage"] ?? "";
-    eventoFavoritos = json["postsFavoritos"] ?? [];
+    telefone = json["telefone"] ?? "";
+    foto =json["foto"] ?? "";
   }
 }

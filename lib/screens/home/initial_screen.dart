@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/typicons_icons.dart';
+import 'package:ticket_app/screens/explorar/explorar_screen.dart';
+import 'package:ticket_app/screens/favorito/favorito_screen.dart';
+import 'package:ticket_app/screens/ingresso/ingresso_screen.dart';
 import '../../models/menu_item_model.dart';
 import '../../shared/widgets/navigation_bar_mobile.dart';
 import '../user/usuario_screen.dart';
@@ -16,24 +20,9 @@ class _InitialScreenState extends State<InitialScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    Scaffold(
-      backgroundColor: Colors.yellow,
-      appBar: AppBar(
-        title: const Text("Favoritos"),
-      ),
-    ),
-    Scaffold(
-      backgroundColor: Colors.red,
-      appBar: AppBar(
-        title: const Text("Viagens"),
-      ),
-    ),
-    Scaffold(
-      backgroundColor: Colors.blue,
-      appBar: AppBar(
-        title: const Text("Mensagens"),
-      ),
-    ),
+    const ExplorarScreen(),
+    const IngressoScreen(),
+    const FavoritoScreen(),
     const UsuarioScreen()
   ];
 
@@ -46,11 +35,11 @@ class _InitialScreenState extends State<InitialScreen> {
   ];
 
   final List<MenuItemModel> _menuItems = [
-    MenuItemModel(icon: Icons.home_outlined, iconColor: Colors.grey, iconText: "Explorar", textColor:  Colors.grey),
-    MenuItemModel(icon: Icons.favorite_outline, iconColor: Colors.grey, iconText: "Favoritos", textColor:  Colors.grey),
-    MenuItemModel(icon: Icons.calendar_today, iconColor: Colors.grey, iconText: "Eventos", textColor:  Colors.grey),
-    MenuItemModel(icon: Icons.messenger_outline, iconColor: Colors.grey, iconText: "Mensagens", textColor:  Colors.grey),
-    MenuItemModel(icon: Icons.person_outlined, iconColor: Colors.grey, iconText: "Perfil", textColor:  Colors.grey),
+    MenuItemModel(icon: Typicons.home_outline, iconColor: Colors.grey, iconText: "HOME", textColor:  Colors.grey),
+    MenuItemModel(icon: Typicons.location, iconColor: Colors.grey, iconText: "EXPLORAR", textColor:  Colors.grey),
+    MenuItemModel(icon: Typicons.ticket, iconColor: Colors.grey, iconText: "INGRESSOS", textColor:  Colors.grey),
+    MenuItemModel(icon: Typicons.heart, iconColor: Colors.grey, iconText: "FAVORITOS", textColor:  Colors.grey),
+    MenuItemModel(icon: Typicons.user_outline, iconColor: Colors.grey, iconText: "PERFIL", textColor:  Colors.grey),
   ];
 
   int _selectedTabIndex = 0;
