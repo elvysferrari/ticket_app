@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import '../../../constants/app_themes.dart';
 import '../../../constants/controllers.dart';
-import '../../../shared/widgets/custom_btn.dart';
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 margin: const EdgeInsets.only(top: 30),
                 child: TextField(
                     controller: userController.nome,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.textGrey),
                         ),
@@ -50,7 +49,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 margin: const EdgeInsets.only(top: 30),
                 child: TextField(
                     controller: userController.email,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.textGrey),
                         ),
@@ -73,7 +72,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 margin: const EdgeInsets.only(top: 30),
                 child: TextField(
                     controller: userController.telefone,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.textGrey),
                         ),
@@ -104,15 +103,15 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 _obscureText = !_obscureText;
                               });
                             },
-                            child: Icon(Typicons.eye)
+                            child: const Icon(Typicons.eye)
                         ),
-                        enabledBorder: UnderlineInputBorder(
+                        enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.textGrey),
                         ),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.primary),
                         ),
-                        icon: Icon(Icons.lock),
+                        icon: const Icon(Icons.lock),
                         fillColor: Colors.white,
                         border: InputBorder.none,
                         hintText: "Senha"),
@@ -123,14 +122,14 @@ class _SignupWidgetState extends State<SignupWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 36.0),
             child: Center(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.90,
                   height: 40,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       primary: AppColors.primary,
                     ),
-                    child: Text('CADASTRAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    child: const Text('CADASTRAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     onPressed: () {
                       userController.signUp();
                     },
