@@ -23,11 +23,9 @@ class _SignupWidgetState extends State<SignupWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 1.2,
+                width: MediaQuery.of(context).size.width * 0.90,
                 margin: const EdgeInsets.only(top: 30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: TextField(
+                child: TextField(
                     controller: userController.nome,
                     decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -42,18 +40,15 @@ class _SignupWidgetState extends State<SignupWidget> {
                         hintText: "Nome"),
                   ),
                 ),
-              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 1.2,
+                width: MediaQuery.of(context).size.width * 0.90,
                 margin: const EdgeInsets.only(top: 30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: TextField(
+                child: TextField(
                     controller: userController.email,
                     decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -68,18 +63,15 @@ class _SignupWidgetState extends State<SignupWidget> {
                         hintText: "Email"),
                   ),
                 ),
-              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 1.2,
+                width: MediaQuery.of(context).size.width * 0.90,
                 margin: const EdgeInsets.only(top: 30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: TextField(
+                child: TextField(
                     controller: userController.telefone,
                     decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -94,18 +86,15 @@ class _SignupWidgetState extends State<SignupWidget> {
                         hintText: "Telefone"),
                   ),
                 ),
-              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 1.2,
+                width: MediaQuery.of(context).size.width * 0.90,
                 margin: const EdgeInsets.only(top: 30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: TextField(
+                child: TextField(
                     controller: userController.password,
                     obscureText: _obscureText,
                     decoration: InputDecoration(
@@ -129,26 +118,25 @@ class _SignupWidgetState extends State<SignupWidget> {
                         hintText: "Senha"),
                   ),
                 ),
-              ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 24.0, top: 12.0, bottom: 12.0),
+            padding: const EdgeInsets.only(top: 36.0),
             child: Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width / 1.2,
-                height: 40,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    primary: AppColors.primary,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  height: 40,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      primary: AppColors.primary,
+                    ),
+                    child: Text('CADASTRAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    onPressed: () {
+                      userController.signUp();
+                    },
                   ),
-                  child: Text('CADASTRAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                  onPressed: () {
-                    userController.signUp();
-                  },
                 ),
               ),
-            ),
           ),
         ],
       ),

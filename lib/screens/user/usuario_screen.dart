@@ -44,15 +44,19 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "Elvys Ferrari",
+                              "${userController.userModel.value.nome!.toUpperCase()}",
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textBlack),
                             ),
-                            Text("elvys.ferrari@gmail.com",
+                            Text("${userController.userModel.value.email}",
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColors.textGrey))
+                            ,
+                            Text("${userController.userModel.value.telefone}",
                                 style: TextStyle(
                                     fontSize: 14, color: AppColors.textGrey))
                           ],
