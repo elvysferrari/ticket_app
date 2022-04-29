@@ -44,6 +44,14 @@ dependencies:
   intl: ^0.17.0
   shared_preferences: ^2.0.13
   fluttericon: ^2.0.0
+  flutter_native_splash: ^2.1.6
+
+flutter_native_splash:
+  background_image: assets/Images/Img_1.png
+  android: true
+  ios: true
+  web: false
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

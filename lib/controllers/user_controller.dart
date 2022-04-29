@@ -85,4 +85,82 @@ class UserController extends GetxController {
     telefone.clear();
     password.clear();
   }
+
+  String? validaNome(String text) {
+    if (text.isNotEmpty) {
+      if(text.length < 8)
+        return 'Informe um nome válido';
+    }
+    return null;
+  }
+
+  String? validaTelefone(String text) {
+    if (text.isNotEmpty) {
+      if(!text.isPhoneNumber)
+        return 'Informe um telefone válido';
+    }
+    return null;
+  }
+
+  String? validaEmail(String text) {
+    if (text.isNotEmpty) {
+      if(!text.isEmail)
+        return 'Informe um email válido';
+    }
+    return null;
+  }
+
+  String? validaSenha(String text) {
+    if (text.isNotEmpty) {
+      if(text.length < 8)
+        return 'Senha muito curta!';
+    }
+    return null;
+  }
+
+  bool botaoEntrar() {
+
+    if(userController.email.text.isEmpty)
+      return false;
+
+    if(userController.password.text.isEmpty)
+      return false;
+
+    if(validaSenha(userController.email.text) != null)
+      return false;
+
+    if(validaSenha(userController.password.text) != null)
+      return false;
+
+    return true;
+  }
+
+  bool botaoCadastrar() {
+
+    if(userController.nome.text.isEmpty)
+      return false;
+
+    if(userController.telefone.text.isEmpty)
+      return false;
+
+    if(userController.email.text.isEmpty)
+      return false;
+
+    if(userController.password.text.isEmpty)
+      return false;
+
+    if(validaSenha(userController.email.text) != null)
+      return false;
+
+    if(validaSenha(userController.password.text) != null)
+      return false;
+
+    if(validaTelefone(userController.email.text) != null)
+      return false;
+
+    if(validaNome(userController.password.text) != null)
+      return false;
+
+    return true;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:intl/intl.dart';
 import 'package:ticket_app/screens/home/initial_screen.dart';
 import 'package:get/get.dart';
@@ -7,8 +8,8 @@ import 'controllers/evento_controller.dart';
 import 'controllers/user_controller.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   Get.put(UserController());
   Get.put(AppController());
   Get.put(EventoController());
