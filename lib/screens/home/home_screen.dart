@@ -91,22 +91,20 @@ class HomeMobile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: Container(
-                        child: const Text("Ticket", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),),
-                      ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 18.0),
+                      child: Text("Ticket", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_on_outlined, size: 28, color: AppColors.primary,),
-                        Text("Qualquer Lugar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textGrey),),
-                        SizedBox(width: 15.0),
+                        const Icon(Icons.location_on_outlined, size: 28, color: AppColors.primary,),
+                        const Text("Qualquer Lugar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textGrey),),
+                        const SizedBox(width: 15.0),
                         Padding(
-                            padding: EdgeInsets.only(right: 28.0),
+                            padding: const EdgeInsets.only(right: 28.0),
                             child: GestureDetector(
                               onTap: () async{
-                              }, child:Icon(Icons.keyboard_arrow_down_outlined, size: 28, color: AppColors.primary,),
+                              }, child:const Icon(Icons.keyboard_arrow_down_outlined, size: 28, color: AppColors.primary,),
                             )
                         ),
                       ],
@@ -195,7 +193,7 @@ class HomeMobile extends StatelessWidget {
                 height: 20,
                 color: Colors.white,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 18),
+                  padding: const EdgeInsets.only(left: 20, right: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -245,7 +243,7 @@ class HomeMobile extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20, right: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: const [
                       Text("O melhor de cada cidade", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
                       Text("Ver mais", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ],

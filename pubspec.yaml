@@ -45,6 +45,8 @@ dependencies:
   shared_preferences: ^2.0.13
   fluttericon: ^2.0.0
   flutter_native_splash: ^2.1.6
+  google_fonts: 2.2.0
+  auto_size_text: 3.0.0
 
 flutter_native_splash:
   background_image: assets/Images/Img_1.png
