@@ -7,16 +7,16 @@ import 'package:ticket_app/constants/app_themes.dart';
 
 import '../../models/evento_model.dart';
 
-class EventoListWidget extends StatefulWidget {
+class EventoListTileWidget extends StatefulWidget {
   final EventoModel evento;
 
-  const EventoListWidget({Key? key, required this.evento}) : super(key: key);
+  const EventoListTileWidget({Key? key, required this.evento}) : super(key: key);
 
   @override
-  State<EventoListWidget> createState() => _EventoListWidgetState();
+  State<EventoListTileWidget> createState() => _EventoListTileWidgetState();
 }
 
-class _EventoListWidgetState extends State<EventoListWidget> {
+class _EventoListTileWidgetState extends State<EventoListTileWidget> {
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _EventoListWidgetState extends State<EventoListWidget> {
   Widget build(BuildContext context) {
     return ListTile(
       leading: ConstrainedBox(
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           minWidth: 44,
           minHeight: 44,
           maxWidth: 64,
@@ -41,9 +41,9 @@ class _EventoListWidgetState extends State<EventoListWidget> {
         ),
       ),
       title: Text("${widget.evento.nome}"),
-      subtitle: Text("${DateFormat('dd/MM - HH:mm', 'pt')
-          .format(DateTime.parse(widget.evento.dataHoraInicio!))}", style: TextStyle(color: AppColors.textDanger),),
-      trailing: Icon(Typicons.right_small),
+      subtitle: Text(DateFormat('dd/MM - HH:mm', 'pt')
+          .format(DateTime.parse(widget.evento.dataHoraInicio!)), style: const TextStyle(color: AppColors.textDanger),),
+      trailing: const Icon(Typicons.right_small),
     );
   }
 }

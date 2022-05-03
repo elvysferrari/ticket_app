@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'  hide Response;
@@ -32,6 +34,10 @@ class UserController extends GetxController {
       if(response.statusCode == 200){
         userModel.value = UserModel.fromJson(response.data["usuario"]);
         await prefs.setString("TOKEN", "${response.data["token"]}");
+
+        Map<String, dynamic> usuario = {'email':email.value.text,'password':password.value.text};
+        await prefs.setString("usuario", jsonEncode(usuario));
+
         Get.snackbar('Sucesso!',
           "Login efetuado com sucesso!",
         );
@@ -41,6 +47,24 @@ class UserController extends GetxController {
       Get.snackbar('Erro!',
         "Usuário ou Senha Inválidos!",
       );
+    }
+  }
+
+  Future<void> automaticSignIn(String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    Response response;
+    try {
+      response = await _http.postRequest('/usuario/login', {
+        'email': email,
+        'password': password
+      });
+
+      if(response.statusCode == 200){
+        userModel.value = UserModel.fromJson(response.data["usuario"]);
+        await prefs.setString("TOKEN", "${response.data["token"]}");
+      }
+    } catch (e) {
     }
   }
 
@@ -58,12 +82,20 @@ class UserController extends GetxController {
       });
 
       if(response.statusCode == 200){
-        userModel.value = UserModel.fromJson(response.data["usuario"]);
-        await prefs.setString("TOKEN", "${response.data["token"]}");
-        Get.snackbar('Sucesso!',
-          "Usuário cadastrado com sucesso!",
-        );
-        _clearControllers();
+        if(response.data["successful"] == false) {
+          Get.snackbar('Erro!',
+            "${response.data["message"]}",
+          );
+        }else {
+          userModel.value = UserModel.fromJson(response.data["usuario"]);
+          await prefs.setString("TOKEN", "${response.data["token"]}");
+          Map<String, dynamic> usuario = {'email':email.value.text,'password':password.value.text};
+          await prefs.setString("usuario", jsonEncode(usuario));
+          Get.snackbar('Sucesso!',
+            "Usuário cadastrado com sucesso!",
+          );
+          _clearControllers();
+        }
       }
     } catch (e) {
       Get.snackbar('Erro!',
@@ -73,9 +105,12 @@ class UserController extends GetxController {
   }
 
   Future<void> signOut() async {
+    userModel.value = UserModel();
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("TOKEN", "");
-    userModel.value = UserModel();
+    await prefs.setString("usuario", "");
+
     appController.isLoginWidgetDisplayed.value = true;
   }
 
@@ -126,7 +161,7 @@ class UserController extends GetxController {
     if(userController.password.text.isEmpty)
       return false;
 
-    if(validaSenha(userController.email.text) != null)
+    if(validaEmail(userController.email.text) != null)
       return false;
 
     if(validaSenha(userController.password.text) != null)
@@ -149,16 +184,16 @@ class UserController extends GetxController {
     if(userController.password.text.isEmpty)
       return false;
 
-    if(validaSenha(userController.email.text) != null)
+    if(validaEmail(userController.email.text) != null)
       return false;
 
     if(validaSenha(userController.password.text) != null)
       return false;
 
-    if(validaTelefone(userController.email.text) != null)
+    if(validaTelefone(userController.telefone.text) != null)
       return false;
 
-    if(validaNome(userController.password.text) != null)
+    if(validaNome(userController.nome.text) != null)
       return false;
 
     return true;

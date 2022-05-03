@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../constants/app_themes.dart';
 import '../../constants/controllers.dart';
 import '../authentication/auth_screen.dart';
-import '../favorito/evento_list.dart';
+import '../evento/evento_list_tile.dart';
 
 class IngressoScreen extends StatefulWidget {
   const IngressoScreen({Key? key}) : super(key: key);

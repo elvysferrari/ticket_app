@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_app/constants/app_themes.dart';
 import 'package:ticket_app/screens/authentication/auth_screen.dart';
 import '../../constants/controllers.dart';
-import 'evento_list.dart';
+import '../evento/evento_list_tile.dart';
 
 class FavoritoScreen extends StatefulWidget {
   const FavoritoScreen({Key? key}) : super(key: key);
@@ -53,7 +52,7 @@ class _FavoritoScreenState extends State<FavoritoScreen> {
       SliverFixedExtentList(
         itemExtent: _itemExtent,
               delegate: SliverChildBuilderDelegate((ctx, index) {
-                  return EventoListWidget(evento: eventoController.eventos[index]);
+                  return EventoListTileWidget(evento: eventoController.eventos[index]);
               },
               childCount: eventoController.eventos.length
 

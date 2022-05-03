@@ -1,14 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:ticket_app/constants/app_constants.dart';
 import 'package:ticket_app/constants/app_themes.dart';
 import 'package:ticket_app/constants/controllers.dart';
 import 'package:ticket_app/constants/responsive.dart';
+import 'package:ticket_app/screens/evento/evento_lista_screen.dart';
 import 'package:ticket_app/screens/home/widgets/cidade_widget.dart';
 import 'package:ticket_app/screens/home/widgets/evento_widget.dart';
 import '../../models/fique_por_dentro_model.dart';
@@ -23,26 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TrackingScrollController _scrollController = TrackingScrollController();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_){
-      loadEventos();
-    });
 
-    initialization();
-  }
-
-  void initialization() async {
-    await Future.delayed(const Duration(seconds: 2));
-    FlutterNativeSplash.remove();
-  }
-
-  loadEventos() async {
-    await eventoController.obterTodosEventos();
-    await eventoController.obterTodosLocaisEventos();
-  }
 
   @override
   void dispose() {
@@ -57,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Responsive(
-          mobile: HomeMobile(scrollController: _scrollController,),
-          desktop: HomeDesktop(scrollController: _scrollController,),
+          mobile: HomeMobile(scrollController: _scrollController,), desktop: Container(),
         ),
       ),
     );
@@ -154,7 +131,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 175.0,
               child: Obx(() =>
-              eventoController.eventos.length == 0 ?
+              eventoController.eventos.isEmpty ?
               const Center(
                   child: SizedBox(
                       height: 50,
@@ -189,9 +166,16 @@ class HomeMobile extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20, right: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("Shows e Festas", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
-                      Text("Ver mais", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),),
+                    children: [
+                      const Text("Shows e Festas", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
+                      GestureDetector(
+                        onTap: (){
+                          Get.to(EventoListaScreen(categoria: "Shows e Festas", eventos: eventoController.eventos));
+                        },
+                        child: const Text("Ver mais",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -206,7 +190,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 125.0,
               child: Obx(() =>
-              eventoController.eventosFiltrados.length == 0 ?
+              eventoController.eventosFiltrados.isEmpty ?
               const Center(
                   child: SizedBox(
                       height: 50,
@@ -233,12 +217,11 @@ class HomeMobile extends StatelessWidget {
                 height: 30,
                 color: Colors.white,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 18),
+                  padding: const EdgeInsets.only(left: 20, right: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Text("O melhor de cada cidade", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textBlack),),
-                      Text("Ver mais", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ],
                   ),
                 ),
@@ -252,7 +235,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 200.0,
               child: Obx(() =>
-              eventoController.localEventos.length == 0 ?
+              eventoController.localEventos.isEmpty ?
               const Center(
                   child: SizedBox(
                       height: 75,
@@ -328,74 +311,6 @@ class HomeMobile extends StatelessWidget {
           ),
         ),
 
-      ],
-    );
-  }
-}
-
-class HomeDesktop extends StatelessWidget {
-
-  final TrackingScrollController scrollController;
-
-  const HomeDesktop({
-    Key? key,
-    required this.scrollController
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Flexible(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              /*child: ListaOpcoes(
-                usuario: usuarioAtual,
-              ),*/
-            )
-        ),
-        const Spacer(),
-        Flexible(
-            flex: 5,
-            child: CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                const SliverPadding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                  sliver: SliverToBoxAdapter(
-                    /*child: AreaStoria(
-                      usuario: usuarioAtual,
-                      estorias: estorias,
-                    ),*/
-                  ),
-                ),
-                const SliverToBoxAdapter(
-                  /*child: AreaCriarPostagem(
-                    usuario: usuarioAtual,
-                  ),*/
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                            (context, indice){
-                          Container();
-                        },
-                        childCount: 1
-                    )
-                )
-              ],
-            )
-        ),
-        const Spacer(),
-        const Flexible(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              /*child: ListaContatos(
-                usuarios: usuariosOnline,
-              ),*/
-            )
-        ),
       ],
     );
   }

@@ -46,7 +46,7 @@ class _EventoDetalheScreenState extends State<EventoDetalheScreen> {
           automaticallyImplyLeading: false,
           leading: GestureDetector(
             onTap: () => Get.back(),
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               color: Color(0xFF090F13),
               size: 32,
@@ -60,8 +60,8 @@ class _EventoDetalheScreenState extends State<EventoDetalheScreen> {
                 alignment: Alignment.centerLeft,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Align(
                 child: Icon(Icons.share,  color: AppColors.primary),
                 alignment: Alignment.centerLeft,
@@ -72,7 +72,7 @@ class _EventoDetalheScreenState extends State<EventoDetalheScreen> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               onPrimary: AppColors.primary, shadowColor: Colors.white),
