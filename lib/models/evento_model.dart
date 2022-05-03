@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class EventoModel {
   int? id;
   String? nome;
@@ -19,7 +21,7 @@ class EventoModel {
 
   EventoModel(
       {this.id,
-        this.nome,
+        required this.nome,
         this.descricao,
         this.urlImagem,
         this.dataHoraInicio,
@@ -76,5 +78,37 @@ class EventoModel {
     data['organizador'] = this.organizador;
     data['destaque'] = this.destaque;
     return data;
+  }
+
+  retornaEndereco(){
+      return '${this.localEndereco}, ${this.localNumero} - ${this.localBairro}, ${this.localCidade} - ${this.localUF}' ;
+  }
+
+  retornaEnderecoMapa(){
+    return '${this.localEndereco}, ${this.localNumero} - ${this.localBairro}, ${this.localCidade} - ${this.localUF}' ;
+  }
+
+  retornaDataInicioFim(String tipoData){
+    String retorno = "";
+
+    if(tipoData == "DATA"){
+      String dataInicio = "${DateFormat.MMMEd('pt').format(DateTime.parse(this.dataHoraInicio!))} - ${DateFormat.y('pt').format(DateTime.parse(this.dataHoraInicio!))}";
+      String dataFinal = dataInicio = "${DateFormat.MMMEd('pt').format(DateTime.parse(this.dataHoraFim!))} - ${DateFormat.y('pt').format(DateTime.parse(this.dataHoraFim!))}";
+      retorno = ('${dataInicio} - ${dataFinal}').toUpperCase();
+    }
+    if(tipoData == "HORA"){
+      String dataInicioHora = DateFormat('HH', 'pt')
+          .format(DateTime.parse(this.dataHoraInicio!));
+      String dataInicioMinuto = DateFormat('mm', 'pt')
+          .format(DateTime.parse(this.dataHoraInicio!));
+      String dataFimHora = DateFormat('HH', 'pt')
+          .format(DateTime.parse(this.dataHoraInicio!));
+      String dataFimMinuto = DateFormat('mm', 'pt')
+          .format(DateTime.parse(this.dataHoraInicio!));
+
+      retorno = '${dataInicioHora}h ${dataInicioMinuto}m - ${dataFimHora}h ${dataFimMinuto}m';
+    }
+
+    return '${retorno}' ;
   }
 }

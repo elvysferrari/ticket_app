@@ -34,7 +34,7 @@ class _EventoWidgetState extends State<EventoWidget> {
       width: widget.width,
       child: GestureDetector(
         onTap: (){
-          Get.to(EventoDetalheScreen(evento: widget.evento));
+          Get.to(() => EventoDetalheScreen(evento: widget.evento));
         },
         child: Card(
           elevation: 0,

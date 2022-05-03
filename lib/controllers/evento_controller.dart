@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +16,10 @@ class EventoController extends GetxController {
   final isLoading = RxBool(false);
   final isUpdate = RxBool(false);
 
+  TextEditingController textoProcura = TextEditingController();
+
   static EventoController instance = Get.find();
+  RxList<EventoModel> eventosFiltrados = <EventoModel>[].obs;
   RxList<EventoModel> eventos = <EventoModel>[].obs;
   RxList<LocalEventoModel> localEventos = <LocalEventoModel>[].obs;
 
@@ -30,6 +35,7 @@ class EventoController extends GetxController {
             .cast<EventoModel>();
 
         eventos.value.addAll(eventoData);
+        eventosFiltrados.addAll(eventoData);
         eventos.refresh();
       }
     } catch (e) {
@@ -54,4 +60,14 @@ class EventoController extends GetxController {
     }
   }
 
+  filtrarEventos(){
+    if(this.textoProcura.text.trim() != "") {
+      eventosFiltrados.value = eventos.where((evento) => evento.nome!.toLowerCase().contains(textoProcura.text.trim().toLowerCase())).toList();
+      eventosFiltrados.refresh();
+    }
+    else {
+      eventosFiltrados.value = eventos.value;
+      eventosFiltrados.refresh();
+    }
+  }
 }

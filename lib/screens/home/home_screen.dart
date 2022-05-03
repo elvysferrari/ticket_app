@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:ticket_app/constants/app_constants.dart';
 import 'package:ticket_app/constants/app_themes.dart';
 import 'package:ticket_app/constants/controllers.dart';
 import 'package:ticket_app/constants/responsive.dart';
@@ -90,25 +92,11 @@ class HomeMobile extends StatelessWidget {
                 const SizedBox(height: 15.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Padding(
+                  children: const [
+                    Padding(
                       padding: EdgeInsets.only(left: 18.0),
-                      child: Text("Ticket", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),),
+                      child: Text(appName, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),),
                     ),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on_outlined, size: 28, color: AppColors.primary,),
-                        const Text("Qualquer Lugar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textGrey),),
-                        const SizedBox(width: 15.0),
-                        Padding(
-                            padding: const EdgeInsets.only(right: 28.0),
-                            child: GestureDetector(
-                              onTap: () async{
-                              }, child:const Icon(Icons.keyboard_arrow_down_outlined, size: 28, color: AppColors.primary,),
-                            )
-                        ),
-                      ],
-                    )
                   ],
                 ),
                 const SizedBox(height: 15.0),
@@ -118,6 +106,7 @@ class HomeMobile extends StatelessWidget {
                     height: 50.0,
                     width: double.infinity,
                     child: CupertinoTextField(
+                      controller: eventoController.textoProcura,
                       keyboardType: TextInputType.text,
                       placeholder: 'Pesquisar eventos, shows...',
                       placeholderStyle: const TextStyle(
@@ -137,6 +126,10 @@ class HomeMobile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         color: const Color(0xffF0F1F5),
                       ),
+
+                      onChanged: (String text) {
+                        eventoController.filtrarEventos();
+                      },
                     ),
                   ),
                 ),
@@ -213,7 +206,7 @@ class HomeMobile extends StatelessWidget {
               color: Colors.white,
               height: 125.0,
               child: Obx(() =>
-              eventoController.eventos.length == 0 ?
+              eventoController.eventosFiltrados.length == 0 ?
               const Center(
                   child: SizedBox(
                       height: 50,
@@ -224,9 +217,9 @@ class HomeMobile extends StatelessWidget {
                   :
               ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: eventoController.eventos.length,
+                itemCount: eventoController.eventosFiltrados.length,
                 itemBuilder: (context, index) {
-                  return EventoWidget(evento: eventoController.eventos[index], width: 150, showDescricao: true,);
+                  return EventoWidget(evento: eventoController.eventosFiltrados[index], width: 150, showDescricao: true,);
                 },
               )
               ),
