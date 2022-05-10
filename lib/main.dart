@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Ticket',
+      title: 'I-Ticket',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

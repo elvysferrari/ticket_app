@@ -35,18 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Responsive(
-          mobile: HomeMobile(scrollController: _scrollController,), desktop: Container(),
+          mobile: HomeFull(scrollController: _scrollController,), desktop: HomeFull(scrollController: _scrollController,),
         ),
       ),
     );
   }
 }
 
-class HomeMobile extends StatelessWidget {
+class HomeFull extends StatelessWidget {
 
   final TrackingScrollController scrollController;
 
-  HomeMobile({
+  HomeFull({
     Key? key,
     required this.scrollController
   }) : super(key: key);
